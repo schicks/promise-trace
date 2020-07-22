@@ -1,23 +1,32 @@
 import traceAll from './all'
 import trace from './trace'
-import { list } from './show'
+import { list, json } from './show'
+
+const line = new Array(5).fill(null).reduce(
+    (acc, _, i) => acc.then(null, null, `line_${i}`),
+    trace(Promise.resolve(null), 'root')
+)
+const T = traceAll<null>(
+    Array(5).fill(null).map((_, i) => line.then(null, null, `bubble_${i}`)),
+    'bubble'
+)
+
+const dags = {
+    line,
+    T
+}
 
 
-describe('list', () => {
-    test('bubble', () => {
-        const root = trace(Promise.resolve(), 'root')
-        const bubble = traceAll<null>(
-            Array(5).fill(null).map((_, i) => root.then(null, null, String(i))),
-            'bubble'
-        )
-        expect(list(bubble)).toMatchSnapshot()
+describe('visualizations', () => {
+    test.each(Object.entries(dags))('it should list all the nodes in %s with their depth', (name, dag) => {
+        expect(list(dag)).toMatchSnapshot()
     })
 
-    test('line', () => {
-        const lineage = new Array(5).fill(null).reduce(
-            (acc, _, i) => acc.then(null, null, String(i)),
-            trace(Promise.resolve(null), 'root')
-        )
-        expect(list(lineage)).toMatchSnapshot()
+    test.each(Object.entries(dags))('it should give a json dependency tree of %s', (name, dag) => {
+        expect(json(dag, true)).toMatchSnapshot()
+    })
+
+    test.each(Object.entries(dags))('it should not show the nodes of %s more than once by default', (name, dag) => {
+        expect(json(dag)).toMatchSnapshot()
     })
 })

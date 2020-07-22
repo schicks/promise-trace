@@ -1,20 +1,235 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`list bubble 1`] = `
-"bubble, 0
-0, 1
-1, 1
-2, 1
-3, 1
-4, 1
-root, 2"
+exports[`visualizations it should give a json dependency tree of T 1`] = `
+Object {
+  "bubble": Object {
+    "bubble_0": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "bubble_1": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "bubble_2": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "bubble_3": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "bubble_4": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+}
 `;
 
-exports[`list line 1`] = `
-"4, 0
-3, 1
-2, 2
-1, 3
-0, 4
-root, 5"
+exports[`visualizations it should give a json dependency tree of line 1`] = `
+Object {
+  "line_4": Object {
+    "line_3": Object {
+      "line_2": Object {
+        "line_1": Object {
+          "line_0": Object {
+            "root": Object {
+              "root": null,
+            },
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`visualizations it should list all the nodes in T with their depth 1`] = `
+Array [
+  Array [
+    "bubble",
+    0,
+  ],
+  Array [
+    "bubble_0",
+    1,
+  ],
+  Array [
+    "bubble_1",
+    1,
+  ],
+  Array [
+    "bubble_2",
+    1,
+  ],
+  Array [
+    "bubble_3",
+    1,
+  ],
+  Array [
+    "bubble_4",
+    1,
+  ],
+  Array [
+    "line_4",
+    2,
+  ],
+  Array [
+    "line_3",
+    3,
+  ],
+  Array [
+    "line_2",
+    4,
+  ],
+  Array [
+    "line_1",
+    5,
+  ],
+  Array [
+    "line_0",
+    6,
+  ],
+  Array [
+    "root",
+    7,
+  ],
+]
+`;
+
+exports[`visualizations it should list all the nodes in line with their depth 1`] = `
+Array [
+  Array [
+    "line_4",
+    0,
+  ],
+  Array [
+    "line_3",
+    1,
+  ],
+  Array [
+    "line_2",
+    2,
+  ],
+  Array [
+    "line_1",
+    3,
+  ],
+  Array [
+    "line_0",
+    4,
+  ],
+  Array [
+    "root",
+    5,
+  ],
+]
+`;
+
+exports[`visualizations it should not show the nodes of T more than once by default 1`] = `
+Object {
+  "bubble": Object {
+    "bubble_0": Object {
+      "line_4": Object {
+        "line_3": Object {
+          "line_2": Object {
+            "line_1": Object {
+              "line_0": Object {
+                "root": Object {
+                  "root": null,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "bubble_1": Object {
+      "line_4": null,
+    },
+    "bubble_2": Object {
+      "line_4": null,
+    },
+    "bubble_3": Object {
+      "line_4": null,
+    },
+    "bubble_4": Object {
+      "line_4": null,
+    },
+  },
+}
+`;
+
+exports[`visualizations it should not show the nodes of line more than once by default 1`] = `
+Object {
+  "line_4": Object {
+    "line_3": Object {
+      "line_2": Object {
+        "line_1": Object {
+          "line_0": Object {
+            "root": Object {
+              "root": null,
+            },
+          },
+        },
+      },
+    },
+  },
+}
 `;
