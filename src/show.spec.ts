@@ -1,6 +1,6 @@
 import traceAll from './all'
 import trace from './trace'
-import { list, json } from './show'
+import { list, json, dot } from './show'
 
 const line = new Array(5).fill(null).reduce(
     (acc, _, i) => acc.then(null, null, `line_${i}`),
@@ -28,5 +28,9 @@ describe('visualizations', () => {
 
     test.each(Object.entries(dags))('it should not show the nodes of %s more than once by default', (name, dag) => {
         expect(json(dag)).toMatchSnapshot()
+    })
+
+    test.each(Object.entries(dags))('it should generate a graphviz definition for %s', (name, dag) => {
+        expect(dot(dag)).toMatchSnapshot()
     })
 })

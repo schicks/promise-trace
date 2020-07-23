@@ -1,5 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`visualizations it should generate a graphviz definition for T 1`] = `
+"digraph G {
+	bubble -> bubble_0;
+	bubble -> bubble_1;
+	bubble -> bubble_2;
+	bubble -> bubble_3;
+	bubble -> bubble_4;
+	bubble_0 -> line_4;
+	line_4 -> line_3;
+	line_3 -> line_2;
+	line_2 -> line_1;
+	line_1 -> line_0;
+	line_0 -> root;
+	bubble_1 -> line_4;
+	bubble_2 -> line_4;
+	bubble_3 -> line_4;
+	bubble_4 -> line_4;
+}"
+`;
+
+exports[`visualizations it should generate a graphviz definition for line 1`] = `
+"digraph G {
+	line_4 -> line_3;
+	line_3 -> line_2;
+	line_2 -> line_1;
+	line_1 -> line_0;
+	line_0 -> root;
+}"
+`;
+
 exports[`visualizations it should give a json dependency tree of T 1`] = `
 Object {
   "bubble": Object {

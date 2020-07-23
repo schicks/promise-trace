@@ -1,23 +1,26 @@
+const reduce = <T, U>(
+    dependencies: (t: T) => T[],
+    f: (acc: U, a: T) => U,
+    init: U
+): (_: T) => U => {
+    const visited = new Set<T>()
+    const helper = (
+        acc: U,
+        t: T
+    ): U => {
+        if (!visited.has(t)) {
+            visited.add(t)
+            return dependencies(t).reduce(helper, f(acc, t))
+        }
+        return acc
+    }
+    return t => helper(init, t)
+}
 
 const map = <T, U>(
-    dependencies: (_: T) => T[],
-    f: (_: T) => U
-): (_: T) => U[] => {
-    const helper = (
-        t: T,
-        visited: Map<T, [number, U]>,
-        i: number
-    ) => {
-        if (!visited.has(t)) {
-            visited.set(t, [i, f(t)])
-            dependencies(t).forEach(d => helper(d, visited, i + 1))
-        }
-        return visited
-    }
-    return t => Array.from(helper(t, new Map(), 0).values())
-        .sort(([a], [b]) => a - b)
-        .map(([_, output]) => output)
-}
+    dependencies: (t: T) => T[],
+    f: (a: T) => U
+): (_: T) => U[] => reduce<T, U[]>(dependencies, (acc, a) => [...acc, f(a)], [])
 
 const namer = <T>(getCandidateName: (_: T) => string): ((_: T) => string) => {
     const names = new Map<string, T>()
@@ -74,5 +77,6 @@ export {
     ranks,
     groupBy,
     map,
-    namer
+    namer,
+    reduce
 }

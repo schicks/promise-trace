@@ -1,5 +1,5 @@
 import { Traceable } from './domain'
-import { ranks, map, namer } from './utilities'
+import { ranks, map, namer, reduce } from './utilities'
 
 const byDependencies = (t: Traceable) => t.dependencies
 
@@ -35,7 +35,7 @@ const json = (
                 if (!visited.has(d) || verbose) {
                     visited.add(d)
                     return { ...acc, [names.get(d) as string]: helper(d) }
-                } else return {...acc, [names.get(d) as string]: null}
+                } else return { ...acc, [names.get(d) as string]: null }
             },
             {}
         )
@@ -50,8 +50,18 @@ const list = (t: Traceable): [string, number][] => {
         .map<[string, number]>(([d, rank]) => [names.get(d) as string, rank])
 }
 
+const dot = (t: Traceable): string => {
+    const names = nameDependencies(t)
+    return reduce(byDependencies, (acc, t) => {
+        return t.dependencies.reduce((acc, d) => {
+            return acc + `\n\t${names.get(t)} -> ${names.get(d)};`
+        }, acc)
+    }, 'digraph G {')(t) + '\n}'
+}
+
 export {
     ranks,
     list,
-    json
+    json,
+    dot
 }
